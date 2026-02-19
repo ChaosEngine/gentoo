@@ -1,4 +1,4 @@
-# Copyright 1999-2025 Gentoo Authors
+# Copyright 1999-2026 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -9,7 +9,7 @@ HOMEPAGE="https://gitlab.gnome.org/GNOME/gnome-panel/"
 
 LICENSE="GPL-2+ FDL-1.1 LGPL-2.1+"
 SLOT="0"
-KEYWORDS="~amd64 ~riscv"
+KEYWORDS="amd64 ~riscv"
 IUSE="eds elogind systemd"
 REQUIRED_USE="^^ ( elogind systemd )"
 
@@ -40,7 +40,7 @@ DEPEND="${RDEPEND}
 "
 BDEPEND="
 	app-text/docbook-xml-dtd:4.1.2
-	dev-util/gdbus-codegen
+	>=dev-util/gdbus-codegen-2.80.5-r1
 	dev-util/glib-utils
 	dev-util/itstool
 	>=sys-devel/gettext-0.19.8

@@ -1,4 +1,4 @@
-# Copyright 1999-2025 Gentoo Authors
+# Copyright 1999-2026 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -17,7 +17,7 @@ HOMEPAGE="
 
 LICENSE="BSD"
 SLOT="0"
-KEYWORDS="~amd64 ~arm ~arm64 ~loong ~ppc64 ~riscv ~x86"
+KEYWORDS="amd64 arm arm64 ~loong ppc64 ~riscv x86"
 
 RDEPEND="
 	dev-python/ipykernel[${PYTHON_USEDEP}]
@@ -27,6 +27,7 @@ RDEPEND="
 "
 
 BDEPEND="
+	dev-python/babel
 	dev-python/hatch-jupyter-builder[${PYTHON_USEDEP}]
 	test? (
 		dev-python/nbval[${PYTHON_USEDEP}]

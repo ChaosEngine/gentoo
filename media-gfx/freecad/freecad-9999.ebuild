@@ -1,4 +1,4 @@
-# Copyright 1999-2025 Gentoo Authors
+# Copyright 1999-2026 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -69,7 +69,7 @@ RDEPEND="
 	dev-qt/qtbase:6[concurrent,network,xml]
 	media-libs/freetype
 	sci-libs/opencascade:=[json]
-	sys-libs/zlib
+	virtual/zlib:=
 	$(python_gen_cond_dep '
 		dev-python/numpy[${PYTHON_USEDEP}]
 		dev-python/pybind11[${PYTHON_USEDEP}]
@@ -93,7 +93,7 @@ RDEPEND="
 		$(python_gen_cond_dep '
 			dev-python/matplotlib[${PYTHON_USEDEP}]
 			>=dev-python/pivy-0.6.5[${PYTHON_USEDEP}]
-			dev-python/pyside:6=[uitools(-),gui,svg,${PYTHON_USEDEP}]
+			>=dev-python/pyside-6.10.1-r5:6=[uitools(-),gui,svg,${PYTHON_USEDEP}]
 		' )
 		virtual/opengl
 		spacenav? ( dev-libs/libspnav[X?] )
@@ -548,7 +548,12 @@ src_install() {
 		_EOF_
 	fi
 	dosym -r "/usr/$(get_libdir)/${PN}/bin/FreeCADCmd" "/usr/bin/FreeCADCmd"
-	dosym -r "/usr/$(get_libdir)/${PN}/bin/freecad-thumbnailer" "/usr/bin/freecad-thumbnailer"
+
+	if [[ -f src/Tools/freecad-thumbnailer ]]; then
+		dobin src/Tools/freecad-thumbnailer
+	else
+		dosym -r "/usr/$(get_libdir)/${PN}/bin/freecad-thumbnailer" "/usr/bin/freecad-thumbnailer"
+	fi
 
 	for dir in share/{applications,icons,metainfo,mime,pixmaps,thumbnailers}; do
 		mv "${ED}/usr/$(get_libdir)/${PN}/${dir}" "${ED}/usr/share/" || die "mv failed"

@@ -1,8 +1,8 @@
-# Copyright 2021-2025 Gentoo Authors
+# Copyright 2021-2026 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
-PYTHON_COMPAT=( python3_{11..13} )
+PYTHON_COMPAT=( python3_{11..14} )
 
 inherit meson python-single-r1 systemd udev
 
@@ -12,7 +12,7 @@ SRC_URI="https://gitlab.freedesktop.org/hadess/switcheroo-control/-/releases/${P
 
 LICENSE="GPL-3"
 SLOT="0"
-KEYWORDS="amd64 ~arm arm64 ~loong ~ppc64 ~riscv x86"
+KEYWORDS="amd64 ~arm arm64 ~loong ppc64 ~riscv x86"
 
 IUSE="gtk-doc selinux test video_cards_amdgpu video_cards_nouveau"
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
@@ -27,7 +27,7 @@ RDEPEND="${PYTHON_DEPS}
 DEPEND="${RDEPEND}"
 BDEPEND="
 	$(python_gen_cond_dep 'dev-python/pygobject:3[${PYTHON_USEDEP}]')
-	dev-util/gdbus-codegen
+	>=dev-util/gdbus-codegen-2.80.5-r1
 	gtk-doc? ( dev-util/gtk-doc )
 	test? (
 		$(python_gen_cond_dep 'dev-python/python-dbusmock[${PYTHON_USEDEP}]')
@@ -55,7 +55,7 @@ src_prepare() {
 
 src_configure() {
 	local emesonargs=(
-		-Drulesdir="$(get_udevdir)"/rules.d
+		-Drulesdir="${EPREFIX}"/"$(get_udevdir)"/rules.d
 		-Dsystemdsystemunitdir="$(systemd_get_systemunitdir)"
 		$(meson_use gtk-doc gtk_doc)
 		$(meson_use test tests)

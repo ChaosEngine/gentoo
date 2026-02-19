@@ -3,15 +3,15 @@
 
 EAPI=8
 
-inherit qmake-utils
+inherit flag-o-matic qmake-utils
 
 DESCRIPTION="Amateur radio SSTV software"
-HOMEPAGE="http://users.telenet.be/on4qz/"
+HOMEPAGE="https://www.qsl.net/o/on4qz/"
 SRC_URI="https://dev.gentoo.org/~tomjbe/distfiles/${P}.tgz"
 
 LICENSE="GPL-3"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="amd64 x86"
 
 CDEPEND="dev-qt/qtbase:6[gui,network,ssl,widgets,xml]
 	media-libs/hamlib:=
@@ -41,6 +41,7 @@ src_prepare() {
 }
 
 src_configure() {
+	filter-lto
 	eqmake6 PREFIX="/usr"
 }
 

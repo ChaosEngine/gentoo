@@ -1,4 +1,4 @@
-# Copyright 1999-2025 Gentoo Authors
+# Copyright 1999-2026 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -42,7 +42,7 @@ REQUIRED_USE="
 #   notify
 #   statusicon
 BDEPEND="
-	dev-util/gdbus-codegen
+	>=dev-util/gdbus-codegen-2.80.5-r1
 	virtual/pkgconfig
 "
 DEPEND="
@@ -50,7 +50,7 @@ DEPEND="
 	dev-libs/glib:2
 	dev-libs/libxml2:2=
 	~media-sound/audacious-${PV}[gtk=,qt6=]
-	sys-libs/zlib
+	virtual/zlib:=
 	>=x11-libs/gdk-pixbuf-2.26:2
 	aac? ( >=media-libs/faad2-2.7 )
 	alsa? ( >=media-libs/alsa-lib-1.0.16 )

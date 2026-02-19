@@ -27,13 +27,13 @@ RDEPEND="
 	net-misc/curl
 	sci-libs/gdal:=
 	>=sci-libs/libgeotiff-1.7.0:=
-	sys-libs/zlib
+	virtual/zlib:=
 	debug? ( sys-libs/libunwind:= )
 	postgres? ( dev-db/postgresql:*[xml] )
 "
 DEPEND="
 	${RDEPEND}
-	test? ( sci-libs/gdal[geos,jpeg,png,sqlite] )
+	test? ( sci-libs/gdal[geos,jpeg(+),png,sqlite] )
 "
 
 src_configure() {

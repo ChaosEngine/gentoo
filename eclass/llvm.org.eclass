@@ -1,4 +1,4 @@
-# Copyright 2019-2025 Gentoo Authors
+# Copyright 2019-2026 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 # @ECLASS: llvm.org.eclass
@@ -57,7 +57,7 @@ LLVM_VERSION=$(ver_cut 1-3)
 # @DESCRIPTION:
 # The major version of current LLVM trunk.  Used to determine
 # the correct branch to use.
-_LLVM_MAIN_MAJOR=22
+_LLVM_MAIN_MAJOR=23
 
 # @ECLASS_VARIABLE: _LLVM_SOURCE_TYPE
 # @INTERNAL
@@ -72,14 +72,11 @@ if [[ -z ${_LLVM_SOURCE_TYPE+1} ]]; then
 			_LLVM_SOURCE_TYPE=snapshot
 
 			case ${PV} in
-				22.0.0_pre20251011)
-					EGIT_COMMIT=6a0e5b2fd7c340a872ae1e011cfb9de0d188feba
+				23.0.0_pre20260214)
+					EGIT_COMMIT=ab25249e63aba72be5365e5dc08c8d3c34d23276
 					;;
-				22.0.0_pre20251004)
-					EGIT_COMMIT=b1e29ec3b73b9dd06656c7e30ace597ff72cde70
-					;;
-				22.0.0_pre20251001)
-					EGIT_COMMIT=89ed5255b9ee88119e409a6d986eb1ad0e8f08e3
+				23.0.0_pre20260207)
+					EGIT_COMMIT=8d2078332c23b10dcf3571adc1a186e5c65f82df
 					;;
 				*)
 					die "Unknown snapshot: ${PV}"
@@ -274,7 +271,7 @@ llvm.org_set_globals() {
 			fi
 			BDEPEND+="
 				verify-sig? (
-					>=sec-keys/openpgp-keys-llvm-21.1.3
+					>=sec-keys/openpgp-keys-llvm-21.1.4
 				)
 			"
 			VERIFY_SIG_OPENPGP_KEY_PATH=/usr/share/openpgp-keys/llvm.asc

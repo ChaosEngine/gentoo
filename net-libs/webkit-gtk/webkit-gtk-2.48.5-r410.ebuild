@@ -1,4 +1,4 @@
-# Copyright 1999-2025 Gentoo Authors
+# Copyright 1999-2026 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -66,7 +66,7 @@ RDEPEND="
 	media-libs/mesa
 	media-libs/woff2
 	net-libs/libsoup:3.0[introspection?]
-	sys-libs/zlib:0
+	virtual/zlib:=
 	x11-libs/cairo[X?]
 	x11-libs/gtk+:3[aqua?,introspection?,wayland?,X?]
 	x11-libs/libdrm
@@ -78,7 +78,7 @@ RDEPEND="
 		media-plugins/gst-plugins-opus:1.0
 		media-libs/gst-plugins-bad:1.0
 	)
-	introspection? ( dev-libs/gobject-introspection:= )
+	introspection? ( >=dev-libs/gobject-introspection-1.82.0-r2:= )
 	jpegxl? ( media-libs/libjxl:= )
 	keyring? ( app-crypt/libsecret )
 	lcms? ( media-libs/lcms:2 )
@@ -102,7 +102,7 @@ BDEPEND="
 	${RUBY_DEPS}
 	app-accessibility/at-spi2-core
 	dev-lang/perl
-	dev-util/gdbus-codegen
+	>=dev-util/gdbus-codegen-2.80.5-r1
 	dev-util/glib-utils
 	dev-util/gperf
 	dev-util/unifdef

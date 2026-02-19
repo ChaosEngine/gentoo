@@ -1,4 +1,4 @@
-# Copyright 1999-2025 Gentoo Authors
+# Copyright 1999-2026 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -22,7 +22,7 @@ fi
 DESCRIPTION="Keyboard and console utilities"
 HOMEPAGE="https://kbd-project.org/"
 
-LICENSE="GPL-2"
+LICENSE="GPL-2+"
 SLOT="0"
 IUSE="bzip2 lzma nls selinux pam test zlib zstd"
 RESTRICT="!test? ( test )"
@@ -35,7 +35,7 @@ DEPEND="
 		!app-misc/vlock
 		sys-libs/pam
 	)
-	zlib? ( sys-libs/zlib )
+	zlib? ( virtual/zlib:= )
 	zstd? ( app-arch/zstd:= )
 "
 RDEPEND="

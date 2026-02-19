@@ -20,7 +20,7 @@ if [[ ${PV} == 9999 ]] ; then
 else
 	SRC_URI="https://github.com/pkgcraft/pkgcraft/releases/download/${P}/${P}.tar.xz"
 
-	KEYWORDS="~amd64"
+	KEYWORDS="amd64"
 fi
 
 LICENSE="MIT"
@@ -44,6 +44,7 @@ BDEPEND+="
 	$(llvm_gen_dep '
 		llvm-core/clang:${LLVM_SLOT}
 	')
+	dev-libs/protobuf[protoc(+)]
 	test? ( dev-util/cargo-nextest )
 "
 

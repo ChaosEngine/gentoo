@@ -1,4 +1,4 @@
-# Copyright 1999-2025 Gentoo Authors
+# Copyright 1999-2026 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -11,7 +11,7 @@ SRC_URI="https://github.com/grke/${PN}/archive/${PV}.tar.gz -> ${P}.tar.gz"
 
 LICENSE="AGPL-3"
 SLOT="0"
-KEYWORDS="~amd64 ~arm ~x86"
+KEYWORDS="amd64 ~arm x86"
 IUSE="acl test xattr"
 
 RESTRICT="!test? ( test )"
@@ -23,7 +23,7 @@ COMMON_DEPEND="acct-group/burp
 	net-libs/librsync:=
 	sys-libs/ncurses:0=
 	sys-libs/libcap
-	sys-libs/zlib
+	virtual/zlib:=
 	virtual/libcrypt:=
 	acl? ( sys-apps/acl )
 	xattr? ( sys-apps/attr )"

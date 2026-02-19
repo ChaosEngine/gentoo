@@ -1,4 +1,4 @@
-# Copyright 1999-2025 Gentoo Authors
+# Copyright 1999-2026 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -33,7 +33,7 @@ else
 	fi
 	SLOT="${PV%%.*}"
 	[[ ${PV} == *.*.* ]] && SLOT+="-vcs"
-	KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~loong ~m68k ~mips ~ppc ~ppc64 ~riscv ~sparc ~x86 ~amd64-linux ~x86-linux ~ppc-macos ~x64-macos"
+	KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~loong ~m68k ~mips ~ppc ~ppc64 ~riscv ~sparc ~x86 ~x64-macos"
 fi
 
 DESCRIPTION="The advanced, extensible, customizable, self-documenting editor"
@@ -70,7 +70,7 @@ X_DEPEND="x11-libs/libICE
 	gtk? ( x11-libs/gtk+:3[X] )
 	!gtk? (
 		motif? (
-			>=x11-libs/motif-2.3:0
+			>=x11-libs/motif-2.3:0=
 			x11-libs/libXpm
 			x11-libs/libXmu
 			x11-libs/libXt
@@ -100,7 +100,7 @@ RDEPEND=">=app-emacs/emacs-common-1.11[games?,gui?]
 	!inotify? ( gfile? ( >=dev-libs/glib-2.28.6 ) )
 	jit? (
 		sys-devel/gcc:=[jit(-)]
-		sys-libs/zlib
+		virtual/zlib:=
 	)
 	kerberos? ( virtual/krb5 )
 	lcms? ( media-libs/lcms:2 )
@@ -114,7 +114,7 @@ RDEPEND=">=app-emacs/emacs-common-1.11[games?,gui?]
 	tree-sitter? ( dev-libs/tree-sitter:= )
 	valgrind? ( dev-debug/valgrind )
 	xattr? ( sys-apps/attr )
-	zlib? ( sys-libs/zlib )
+	zlib? ( virtual/zlib:= )
 	gui? (
 		gif? ( media-libs/giflib:0= )
 		jpeg? ( media-libs/libjpeg-turbo:0= )
@@ -409,6 +409,8 @@ src_configure() {
 }
 
 src_compile() {
+	unset SHELL #965834
+
 	if tc-is-cross-compiler; then
 		# Build native tools for compiling lisp etc.
 		emake -C "${S}-build" src
@@ -445,12 +447,17 @@ src_test() {
 		%lisp/vc/vc-tests.el
 		%lisp/vc/vc-bzr-tests.el
 
+		# Reason: malformed html tag in test, https://bugs.gnu.org/79041
+		# shr-test/zoom-image
+		%lisp/net/shr-tests.el
+
+		%lisp/progmodes/eglot-tests.el  #966957
+
 		# Reason: tries to access network
 		# internet-is-working
 		%src/process-tests.el
 	)
 	use threads || exclude_tests+=(
-			%lisp/progmodes/eglot-tests.el
 			%src/emacs-module-tests.el
 			%src/keyboard-tests.el
 		)
@@ -577,8 +584,8 @@ src_install() {
 		own e-mail features are going to be used as an e-mail client
 		(e.g. Rmail), you are strongly encouraged to enable it. If not,
 		Emacs will use its own implementation of movemail; which has
-		fewer features and is less secure. For more information see:
-		https://www.gnu.org/software/emacs/manual/html_node/emacs/Movemail.html"
+		fewer features and is less secure. For more information see the
+		Info node '(emacs)Movemail' in the Emacs manual."
 	fi
 	tc-is-cross-compiler && DOC_CONTENTS+="\\n\\nEmacs did not write
 		a portable dump file due to being cross-compiled.

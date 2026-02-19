@@ -1,4 +1,4 @@
-# Copyright 1999-2025 Gentoo Authors
+# Copyright 1999-2026 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -19,7 +19,7 @@ IUSE="wayland"
 RDEPEND="
 	app-text/iso-codes
 	>=dev-libs/glib-2.37.3:2[dbus]
-	>=dev-libs/gobject-introspection-0.10.2:=
+	>=dev-libs/gobject-introspection-1.82.0-r2:=
 	>=gnome-base/gsettings-desktop-schemas-3.5.91
 	>=media-libs/libpulse-12.99.3[glib]
 	sys-apps/accountsservice
@@ -39,7 +39,7 @@ DEPEND="
 "
 BDEPEND="
 	${PYTHON_DEPS}
-	dev-util/gdbus-codegen
+	>=dev-util/gdbus-codegen-2.80.5-r1
 	dev-util/glib-utils
 	sys-devel/gettext
 	virtual/pkgconfig

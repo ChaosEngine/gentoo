@@ -1,4 +1,4 @@
-# Copyright 1999-2025 Gentoo Authors
+# Copyright 1999-2026 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -21,12 +21,11 @@ REQUIRED_USE="
 RDEPEND="
 	>=dev-libs/glib-2.38.0:2
 	gtk? ( >=x11-libs/gdk-pixbuf-2.12:2 )
-	introspection? ( >=dev-libs/gobject-introspection-1.30:= )
+	introspection? ( >=dev-libs/gobject-introspection-1.82.0-r2:= )
 	qt6? ( dev-qt/qtbase:6[gui] )
 "
 DEPEND="${RDEPEND}"
 BDEPEND="
-	dev-libs/gobject-introspection-common
 	virtual/pkgconfig
 	gtk-doc? ( dev-util/gtk-doc )
 	vala? ( $(vala_depend) )

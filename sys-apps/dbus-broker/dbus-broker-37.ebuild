@@ -1,4 +1,4 @@
-# Copyright 2017-2025 Gentoo Authors
+# Copyright 2017-2026 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -10,7 +10,7 @@ if [[ ${PV} == 9999 ]]; then
 	EGIT_REPO_URI="https://github.com/bus1/dbus-broker.git"
 else
 	SRC_URI="https://github.com/bus1/${PN}/releases/download/v${PV}/${P}.tar.xz"
-	KEYWORDS="~amd64 ~arm64 ~loong ~ppc64 ~riscv"
+	KEYWORDS="amd64 arm64 ~loong ppc64 ~riscv"
 fi
 
 DESCRIPTION="Linux D-Bus Message Broker"
@@ -40,6 +40,10 @@ BDEPEND="
 	doc? ( dev-python/docutils )
 	virtual/pkgconfig
 "
+
+PATCHES=(
+	"${FILESDIR}"/dbus-broker-37-test-sockopt.patch
+)
 
 if [[ ${PV} == 9999 ]]; then
 src_unpack() {

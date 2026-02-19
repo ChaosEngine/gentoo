@@ -16,7 +16,7 @@ DESCRIPTION="X.Org libdrm library"
 HOMEPAGE="https://dri.freedesktop.org/ https://gitlab.freedesktop.org/mesa/drm"
 if [[ ${PV} != 9999* ]]; then
 	SRC_URI="https://dri.freedesktop.org/libdrm/${P}.tar.xz"
-	KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~loong ~m68k ~mips ~ppc ~ppc64 ~riscv ~s390 ~sparc ~x86 ~amd64-linux ~x86-linux"
+	KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~loong ~m68k ~mips ~ppc ~ppc64 ~riscv ~s390 ~sparc ~x86"
 fi
 
 VIDEO_CARDS="amdgpu exynos freedreno intel nouveau omap radeon tegra vc4 vivante vmware"
@@ -34,10 +34,6 @@ COMMON_DEPEND="
 DEPEND="${COMMON_DEPEND}
 	valgrind? ( dev-debug/valgrind )"
 RDEPEND="${COMMON_DEPEND}
-	video_cards_amdgpu? (
-		tools? ( >=dev-util/cunit-2.1 )
-		test?  ( >=dev-util/cunit-2.1 )
-	)
 	udev? ( virtual/udev )"
 BDEPEND="${PYTHON_DEPS}
 	doc? ( $(python_gen_any_dep 'dev-python/docutils[${PYTHON_USEDEP}]') )"

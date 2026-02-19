@@ -1,4 +1,4 @@
-# Copyright 1999-2025 Gentoo Authors
+# Copyright 1999-2026 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -12,7 +12,7 @@ S="${WORKDIR}"/thc-${P}
 
 LICENSE="GPL-3"
 SLOT="0"
-KEYWORDS="~amd64 ~ppc ~x86"
+KEYWORDS="amd64 ~ppc x86"
 IUSE="debug gcrypt gtk idn memcached mongodb mysql ncurses oracle pcre postgres rdp libssh samba subversion zlib"
 
 RDEPEND="
@@ -41,13 +41,14 @@ RDEPEND="
 	libssh? ( >=net-libs/libssh-0.4.0 )
 	samba? ( net-fs/samba )
 	subversion? ( dev-vcs/subversion )
-	zlib? ( sys-libs/zlib )
+	zlib? ( virtual/zlib:= )
 "
 DEPEND="${RDEPEND}"
 BDEPEND="virtual/pkgconfig"
 
 PATCHES=(
 	"${FILESDIR}"/${PN}-9.5-no-clobber-fortify-source.patch
+	"${FILESDIR}"/${PN}-9.6-c23.patch
 )
 
 src_prepare() {

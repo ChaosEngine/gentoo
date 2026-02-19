@@ -1,4 +1,4 @@
-# Copyright 1999-2025 Gentoo Authors
+# Copyright 1999-2026 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -22,7 +22,7 @@ REQUIRED_USE="vala? ( introspection )"
 RDEPEND="
 	>=dev-libs/glib-2.67.4:2
 	sys-apps/dbus
-	introspection? ( >=dev-libs/gobject-introspection-0.6.2:= )
+	introspection? ( >=dev-libs/gobject-introspection-1.82.0-r2:= )
 	>=gui-libs/libadwaita-1.6_beta
 	>=gui-libs/gtk-4.15.2:4
 	>=dev-libs/json-glib-0.16
@@ -42,11 +42,10 @@ PDEPEND="gnome? ( >=gnome-base/gnome-control-center-3.2[gnome-online-accounts(+)
 DEPEND="${RDEPEND}
 	vala? ( $(vala_depend) )
 	dev-libs/libxslt
-	>=dev-util/gdbus-codegen-2.30.0
+	>=dev-util/gdbus-codegen-2.80.5-r1
 	>=sys-devel/gettext-0.19.8
 	virtual/pkgconfig
 
-	dev-libs/gobject-introspection-common
 	gnome-base/gnome-common
 "
 BDEPEND="doc? ( dev-util/gi-docgen )"

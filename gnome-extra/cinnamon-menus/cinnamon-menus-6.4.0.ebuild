@@ -1,4 +1,4 @@
-# Copyright 1999-2025 Gentoo Authors
+# Copyright 1999-2026 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -16,11 +16,10 @@ IUSE="gtk-doc"
 
 RDEPEND="
 	>=dev-libs/glib-2.29.15:2
-	>=dev-libs/gobject-introspection-1.58.3:=
+	>=dev-libs/gobject-introspection-1.82.0-r2:=
 "
 DEPEND="
 	${RDEPEND}
-	dev-libs/gobject-introspection-common
 "
 BDEPEND="
 	sys-devel/gettext

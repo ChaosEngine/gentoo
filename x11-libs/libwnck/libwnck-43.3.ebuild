@@ -10,7 +10,7 @@ HOMEPAGE="https://developer.gnome.org/libwnck/stable/"
 
 LICENSE="LGPL-2+"
 SLOT="3"
-KEYWORDS="~alpha amd64 arm arm64 ~hppa ~loong ~mips ppc ~ppc64 ~riscv ~sparc x86 ~amd64-linux ~x86-linux ~ppc-macos ~x64-solaris"
+KEYWORDS="~alpha amd64 arm arm64 ~hppa ~loong ~mips ppc ppc64 ~riscv ~sparc x86 ~x64-solaris"
 
 IUSE="gtk-doc +introspection startup-notification tools"
 
@@ -21,7 +21,7 @@ RDEPEND="
 	startup-notification? ( >=x11-libs/startup-notification-0.4 )
 	x11-libs/libX11
 	>=x11-libs/libXres-1.2
-	introspection? ( >=dev-libs/gobject-introspection-1.56:= )
+	introspection? ( >=dev-libs/gobject-introspection-1.82.0-r2:= )
 "
 # libXi header used by wnckprop.c, which is compiled even with USE=-tools (just not installed then)
 DEPEND="${RDEPEND}

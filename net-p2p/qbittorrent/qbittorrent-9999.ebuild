@@ -1,4 +1,4 @@
-# Copyright 2023-2025 Gentoo Authors
+# Copyright 2023-2026 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -31,11 +31,14 @@ REQUIRED_USE="
 	dbus? ( gui )
 "
 
+# boost is not linked, but we must rebuild when libtorrent-rasterbar does.
+# See bug #969055
 RDEPEND="
+	>=dev-libs/boost-1.76:=
 	>=dev-libs/openssl-3.0.2:=
 	>=dev-qt/qtbase-6.5:6[network,ssl,sql,sqlite,xml]
 	>=net-libs/libtorrent-rasterbar-2.0.10:=
-	>=sys-libs/zlib-1.2.11
+	>=virtual/zlib-1.2.11:=
 	gui? (
 		>=dev-qt/qtbase-6.5:6[dbus?,gui,widgets]
 		>=dev-qt/qtsvg-6.5:6
@@ -47,7 +50,6 @@ RDEPEND="
 "
 DEPEND="
 	${RDEPEND}
-	>=dev-libs/boost-1.76
 "
 BDEPEND+="
 	>=dev-qt/qttools-6.5:6[linguist]

@@ -1,4 +1,4 @@
-# Copyright 2021-2025 Gentoo Authors
+# Copyright 2021-2026 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -55,7 +55,7 @@ REQUIRED_USE="
 # - qtsql (src/plugins/sqldrivers/configure.cmake)
 # nolink: renderdoc, systemd
 COMMON_DEPEND="
-	sys-libs/zlib:=
+	virtual/zlib:=
 	ssl? ( dev-libs/openssl:= )
 	udev? ( virtual/libudev:= )
 	zstd? ( app-arch/zstd:= )
@@ -207,6 +207,13 @@ src_prepare() {
 }
 
 src_configure() {
+	# temporary warning to spare surprised users for whom "it worked before",
+	# will drop this in Qt 6.11 (bug #966289)
+	if use custom-cflags && tc-cpp-is-true __RDRND__ ${CXXFLAGS}; then
+		ewarn "USE=custom-cflags is enabled, and there is a good chance that the build"
+		ewarn "will fail with current CXXFLAGS. Please disable it if have issues."
+	fi
+
 	if use gtk; then
 		# defang automagic dependencies (bug #624960)
 		use X || append-cxxflags -DGENTOO_GTK_HIDE_X11
@@ -322,6 +329,13 @@ src_configure() {
 	)
 
 	qt6-build_src_configure
+}
+
+src_compile() {
+	# workaround missing qtest include race condition when building
+	# the new test from qtbase@b412e424b (needs more looking into)
+	cmake_build include/QtTest/QtTest
+	cmake_src_compile
 }
 
 src_test() {

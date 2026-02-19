@@ -32,7 +32,7 @@ COMMON_DEPEND="
 	>=gnome-base/librsvg-2.40
 	>=media-libs/portaudio-12[cxx]
 	>=media-libs/libsndfile-1.0.25
-	sys-libs/zlib:=
+	virtual/zlib:=
 	>=x11-libs/gtk+-3.18.9:3
 	>=x11-libs/gtksourceview-4.0
 "
@@ -47,7 +47,7 @@ BDEPEND="
 PATCHES=(
 	"${FILESDIR}/${PN}-1.1.1-nostrip.patch"
 	"${FILESDIR}/${PN}-1.2.3-nocompress.patch"
-	"${FILESDIR}/${PN}-1.2.3-lua-5-4.patch"
+	"${FILESDIR}/${PN}-1.2.8-lua.patch"
 )
 
 src_configure() {

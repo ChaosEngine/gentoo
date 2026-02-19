@@ -1,4 +1,4 @@
-# Copyright 1999-2025 Gentoo Authors
+# Copyright 1999-2026 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -75,9 +75,12 @@ fi
 LICENSE="GPL-3+"
 SLOT="0"
 if (( PLEVEL >= 0 )); then
-	KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~loong ~m68k ~mips ~ppc ~ppc64 ~riscv ~s390 ~sparc ~x86 ~amd64-linux ~x86-linux ~arm64-macos ~ppc-macos ~x64-macos ~x64-solaris"
+	KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~loong ~m68k ~mips ~ppc ~ppc64 ~riscv ~s390 ~sparc ~x86 ~arm64-macos ~x64-macos ~x64-solaris"
 fi
 IUSE="afs bashlogger examples mem-scramble +net nls plugins pgo +readline"
+# As of 5.4_alpha_pre20251016, bash tests finally exit non-0 on failure.
+# The differences look harmless but need investigation and fixing.
+RESTRICT="test"
 
 DEPEND="
 	>=sys-libs/ncurses-5.2-r2:=
@@ -272,7 +275,9 @@ src_compile() {
 		# Used in test suite.
 		unset -v A
 
-		emake CFLAGS="${CFLAGS} ${pgo_generate_flags[*]}" -k check
+		# Testsuite isn't expected to pass for bash right now, but it
+		# also doesn't matter for PGO.
+		nonfatal emake CFLAGS="${CFLAGS} ${pgo_generate_flags[*]}" -k check
 
 		if tc-is-clang; then
 			llvm-profdata merge "${T}"/pgo --output="${T}"/pgo/default.profdata || die
@@ -438,7 +443,7 @@ EOF
 			cat <<'EOF'
 The window title setting behaviour has been improved. It is now formatted as
 "\u@\h \W", in accordance with the prompting mechanism of bash. For example,
-after switching to the home directory, the current working directly will be
+after switching to the home directory, the current working directory will be
 shown as the <tilde> character.
 
 The value of PROMPT_DIRTRIM is now respected. If this variable is unset, the

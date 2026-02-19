@@ -1,4 +1,4 @@
-# Copyright 1999-2025 Gentoo Authors
+# Copyright 1999-2026 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -30,7 +30,7 @@ RDEPEND="
 	>=net-print/cups-1.7.3
 	!<=net-print/cups-1.5.9999
 	app-alternatives/bc
-	sys-libs/zlib
+	virtual/zlib:=
 	exif? ( media-libs/libexif )
 	dbus? ( sys-apps/dbus )
 	foomatic? ( !net-print/foomatic-filters )
@@ -45,7 +45,7 @@ RDEPEND="
 "
 DEPEND="${RDEPEND}"
 BDEPEND="
-	dev-util/gdbus-codegen
+	>=dev-util/gdbus-codegen-2.80.5-r1
 	>=sys-devel/gettext-0.18.3
 	virtual/pkgconfig
 	test? ( media-fonts/dejavu )

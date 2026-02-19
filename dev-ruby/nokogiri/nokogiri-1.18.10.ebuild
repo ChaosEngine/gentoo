@@ -19,18 +19,18 @@ SRC_URI="https://github.com/sparklemotion/nokogiri/archive/v${PV}.tar.gz -> ${P}
 LICENSE="MIT"
 
 SLOT="0"
-KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~loong ~mips ~ppc ~ppc64 ~riscv ~s390 ~sparc ~x86 ~arm64-macos"
+KEYWORDS="~alpha amd64 arm arm64 ~hppa ~loong ~mips ppc ppc64 ~riscv ~s390 ~sparc x86 ~arm64-macos"
 IUSE="test"
 
 RDEPEND="
 	>=dev-libs/libxml2-2.13.9:=
 	>=dev-libs/libxslt-1.1.43
-	>=sys-libs/zlib-1.3.1
+	>=virtual/zlib-1.3.1:=
 	virtual/libiconv"
 DEPEND="
 	>=dev-libs/libxml2-2.13.9:=
 	>=dev-libs/libxslt-1.1.43
-	>=sys-libs/zlib-1.3.1
+	>=virtual/zlib-1.3.1:=
 	virtual/libiconv"
 
 ruby_add_rdepend ">=dev-ruby/racc-1.4:0"
@@ -39,7 +39,7 @@ ruby_add_bdepend "
 	dev-ruby/mini_portile2:2.8
 	>=dev-ruby/rexical-1.0.7
 	dev-ruby/rdoc
-	test? ( dev-ruby/minitest dev-ruby/rubyzip )"
+	test? ( dev-ruby/minitest:5 dev-ruby/rubyzip )"
 
 all_ruby_prepare() {
 	sed -i \
@@ -53,6 +53,7 @@ all_ruby_prepare() {
 	sed -i -e '/cross_config_options/d' Rakefile || die
 
 	sed -e '/reporters/I s:^:#:' \
+		-e '1igem "minitest", "~> 5.0"' \
 		-i test/helper.rb || die
 
 	# There is no need for mini_portile2 to be a runtime dependency on Gentoo

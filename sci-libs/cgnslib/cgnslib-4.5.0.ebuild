@@ -1,4 +1,4 @@
-# Copyright 1999-2025 Gentoo Authors
+# Copyright 1999-2026 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -18,8 +18,8 @@ S="${WORKDIR}/CGNS-${PV}"
 
 LICENSE="ZLIB"
 SLOT="0/$(ver_cut 1-2)"
-KEYWORDS="~amd64 ~arm ~arm64 ~x86 ~amd64-linux ~x86-linux"
-IUSE="base-scope debug examples fortran hdf5 legacy mpi scoping szip test tools"
+KEYWORDS="amd64 ~arm ~arm64 ~x86"
+IUSE="base-scope debug examples fortran +hdf5 legacy mpi scoping szip test tools"
 
 RDEPEND="
 	hdf5? ( sci-libs/hdf5:=[mpi=,szip=] )
@@ -61,11 +61,6 @@ src_prepare() {
 }
 
 src_configure() {
-	# -Werror=lto-type-mismatch
-	# https://bugs.gentoo.org/862684
-	# https://github.com/CGNS/CGNS/issues/758
-	filter-lto
-
 	# Needed for uses an internal header (bug #934122)
 	if use tools ; then
 		local tk_ver=$(best_version dev-lang/tk)
