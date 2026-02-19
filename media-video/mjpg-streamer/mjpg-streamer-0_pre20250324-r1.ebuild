@@ -50,7 +50,8 @@ src_prepare() {
 	done
 	popd || die
 
-	sed -e "s|@LIBDIR@|$(get_libdir)/${PN}/$(get_libdir)|g" "${FILESDIR}/${PN}.initd" > "${S}/${PN}.initd" || die
+	sed -e "s|@LIBDIR@|$(get_libdir)/${PN}/$(get_libdir)|g" \
+		"${FILESDIR}/${PN}.initd" > "${S}/${PN}.initd" || die
 
 	cmake_src_prepare
 }
@@ -70,7 +71,7 @@ src_install() {
 
 	newinitd "${S}/${PN}.initd" ${PN}
 	newconfd "${FILESDIR}"/${PN}.confd ${PN}
-	systemd_dounit mjpg_streamer@.service
+	systemd_dounit "${CMAKE_USE_DIR}/mjpg_streamer@.service"
 }
 
 pkg_postinst() {
