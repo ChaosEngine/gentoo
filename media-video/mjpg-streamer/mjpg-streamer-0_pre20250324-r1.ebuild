@@ -39,7 +39,6 @@ DOCS=( README.md TODO )
 
 PATCHES=(
 	"${FILESDIR}/${PN}-0_pre20250324-cmake4.patch" # downstream patch
-	"${FILESDIR}/${PN}-0_pre20250324-norpath.patch" # downstream patch
 )
 
 src_prepare() {
